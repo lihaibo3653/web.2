@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        body{
+            background: #333;
+        }
+        .container{
+            height:560px;
+            width:400px;
+            margin:0 auto;
+        }
+        .box{
+            width:300px;
+        }
+        #title,#bottom{
+            height:30px;
+            background:#000;
+            line-height:30px;
+            text-align: center;
+            color:#fff;
+        }
+        img{
+            width:300px;
+            height:400px;
+            vertical-align: middle;
+        }
+        ul{
+            margin:0;
+            padding:0;
+            list-style: none;
+        }
+        .clear{
+            zoom:1;
+        }
+        .clear:after{
+            content: ' ';
+            display:block;
+            clear:both;
+        }
+        li{
+            float:left;
+            width:40px;
+            height:40px;
+            background:#666;
+            margin-right: 4px;
+            cursor: pointer;
+            border:2px solid #ddd;
+            border-radius: 5px;
+            transition:border 1s;
+        }
+        li img{
+            width:100%;
+            height:100%;
+        }
+        li.active{
+            border:2px solid #ffcc33;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="box">
+            <div id="title">加载中。。。</div>
+            <div id="big_image_container">
+                <img src="js/imgs/1.jpg"/>
+            </div>
+            <div id="bottom"></div>
+        </div>
+        <ul id="small_image_container" class="clear"></ul>
+    </div>
+
+    <div id="small_image_template" style="display:none">
+            <li><img src=""></li>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+</body>
+</html>
+
+<script>
+    var old_index = 0;
+    var arrurls = ['js/imgs/1.jpg','js/imgs/2.jpg','js/imgs/3.jpg','js/imgs/4.jpg','js/imgs/5.jpg']
+    var arrTexts = ['image1','image2','image3','image4','image5']
+
+    //显示小图
+    for(var i =  0; i < arrurls.length ; ++i)
+    {
+        var small_image_template = jQuery('#small_image_template').find('li').clone(true);
+        small_image_template.find('img').attr('src',arrurls[i]);
+        //small_image_template.insertAfter(jQuery('#small_image_container'));
+        small_image_template.attr('data-index',i);
+        jQuery('#small_image_container').append(small_image_template);
+    }
+
+    jQuery('#small_image_container li').click(function(){
+        var data_index = jQuery(this).attr('data-index');
+        data_index = parseInt(data_index);
+        var big_image = arrurls[data_index];
+        jQuery('#big_image_container').find('img').attr('src',big_image);
+        old_index = data_index;
+    });
+
+    var update_fun = function()
+    {
+        old_index += 1;
+        if(old_index >= arrurls.length)
+        {
+            old_index = 0;
+        }
+        
+        var big_image = arrurls[old_index];
+        jQuery('#big_image_container').find('img').attr('src',big_image);
+        jQuery('#title').html(arrTexts[old_index]);
+    }
+
+    var interval_id = setInterval(update_fun,1500);
+
+    jQuery('#big_image_container').find('img').mouseover(function(){
+        if(interval_id)
+        {
+            clearInterval(interval_id);
+            interval_id = undefined;
+        }
+    });
+
+    jQuery('#big_image_container').find('img').mouseleave(function(){
+        interval_id = setInterval(update_fun,1500);
+    });
+
+</script>
+
+<script>
+    /*var arrurls = ['js/imgs/1.jpg','js/imgs/2.jpg','js/imgs/3.jpg','js/imgs/4.jpg','js/imgs/5.jpg']
+    var arrTexts = ['image1','image2','image3','image4','image5']
+    var title = document.getElementById('title');
+    var bottom = document.getElementById('bottom');
+    var img = document.getElementsByTagName('img')[0];
+    var ul = document.getElementsByTagName('ul')[0];
+
+    var  small_images_html = '';
+    //显示小图
+    for(var i = 0; i < arrurls.length ; i++)
+    {
+        small_images_html +='<li><img src="' + arrurls[i] + '"></li>';
+    }
+
+    console.log('small_images_html:',small_images_html);
+    ul.innerHTML = small_images_html;
+
+
+    var lis = document.getElementsByTagName('li');
+
+    var update_big_image = function(index)
+    {
+        var current_index  = index;
+        return function()
+        {
+            console.log('select image :',current_index);
+            update_fun(current_index);
+        }
+    }
+
+    for(var i = 0 ; i < lis.length ; ++i)
+    {
+        lis[i].onclick = update_big_image(i);
+    }
+    
+    var old_index = 0;
+
+    var update_fun = function(select_index)
+    {
+        if(select_index == undefined)
+        {
+            old_index += 1;
+            if(old_index >= arrurls.length)
+            {
+                old_index = 0;
+            }
+        }else{
+            old_index = select_index;
+        }
+        var url = arrurls[old_index];
+        var title_string = arrTexts[old_index];
+
+        img.src = url;
+        title.innerHTML = title_string;
+    }
+
+    var interval_id = setInterval(update_fun,5500);
+
+    img.onmouseover = function()
+    {
+        if(interval_id)
+        {
+            clearInterval(interval_id);
+            interval_id = undefined;
+        }
+    }
+
+    img.onmouseout = function()
+    {
+        interval_id = setInterval(update_fun,5500);
+    }*/
+
+</script>
