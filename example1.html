@@ -1,0 +1,160 @@
+<head>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
+</head>
+
+<body>
+        <div class="ui comments" >
+                <div class="comment" id="comments_container">
+                  <a class="avatar">
+                    <img src="https://pmcvariety.files.wordpress.com/2013/07/avatar.jpg?w=1000&h=563&crop=1">
+                  </a>
+                  <div class="content">
+                    <a class="author">Steve Jobes</a>
+                    <div class="metadata">
+                      <div class="date">2 days ago</div>
+                    </div>
+                    <div class="text">
+                      Revolutionary!
+                    </div>
+                    <div class="actions">
+                      <a class="reply active">Reply</a>
+                    </div>
+                    <form class="ui reply form">
+                      <div class="field">
+                        <textarea id="comment_content" onChange="update_submit_button()"></textarea>
+                      </div>
+                      <div id="submit_button" class="ui primary submit labeled icon button">
+                        <i class="icon edit"></i> Add Reply
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
+              <style>
+                  .avatar img{
+                      width: 35px!important;
+                      height: 35px!important;
+                  }
+              </style>
+
+            
+<div id="clone_comment_item" style="display:none">
+        <div class="content">
+                <a class="author">Steve Jobes</a>
+                <div class="metadata">
+                  <div class="date">2 days ago</div>
+                </div>
+                <div class="text">
+                  Revolutionary!
+                </div>
+                <div class="actions">
+                  <a class="reply active">Reply</a>
+                  <a class="delete active" onclick="on_reply_delete(this)">Delete</a>
+                </div>
+        </div>
+</div>
+</body>
+
+<script>
+    //var j = jQuery.noConflict();
+
+    var submit_button = jQuery('#submit_button');
+    var comment_content = jQuery('#comment_content');
+
+    submit_button.click(function(){
+        var content = comment_content.val();
+        if(!content || content.length == 0)
+        {
+            var ret = alert("评论的内容不有为空！");
+            return undefined;
+        }
+      
+       var new_comment_eles = jQuery('#clone_comment_item').find('.content').clone(true);
+       new_comment_eles.find('.text').html(content);
+       jQuery('#comments_container').before(new_comment_eles);
+        
+        comment_content.val('');
+       
+    });
+
+    var update_submit_button = function()
+    {
+      var content = comment_content.val();
+        if(!content || content.length == 0)
+        {
+            submit_button.addClass('disabled');
+        }else{
+            submit_button.removeClass('disabled');
+        }
+    }
+    comment_content[0].addEventListener('keydown', function (e) {
+        update_submit_button();
+    });
+
+    update_submit_button();
+
+      //删除评论
+    var on_reply_delete = function(delete_button)
+    {
+        jQuery(delete_button).parents('.content').remove()
+    }
+</script>
+
+<script>
+
+    /*var submit_button = document.getElementById('submit_button');
+    var comment_content = document.getElementById("comment_content");
+
+    comment_content.addEventListener('keydown', function (e) {
+        update_submit_button();
+    });
+
+    var update_submit_button = function()
+    {
+        var comment_content_string = comment_content.value;
+        if(comment_content_string && comment_content_string.length > 0)
+        {
+            submit_button.classList.remove('disabled');
+        }else{
+            submit_button.classList.add('disabled');
+        }
+    }
+
+    //删除评论
+    var on_reply_delete = function(delete_button)
+    {
+        var content_ele = delete_button.parentElement.parentElement;
+        console.log('content_ele:',content_ele);
+        content_ele.parentNode.removeChild(content_ele);
+    }
+  
+    
+    submit_button.onclick = function()
+    {
+        var comment_content_string = comment_content.value;
+        
+        var new_comment = document.createElement('div');
+    
+        var clone_comment_item = document.getElementById('clone_comment_item');
+        //获取需要拷贝的评论html元素
+        var need_clone_comment_item = clone_comment_item.children[0];
+        //深度拷贝一份
+        need_clone_comment_item = need_clone_comment_item.cloneNode(true);
+        //从拷贝的节点中找到text(也就是评论的内容)
+        var comment_text = need_clone_comment_item.querySelector('.text');
+
+        comment_text.innerHTML = comment_content_string;
+
+        var comments_container = document.getElementById('comments_container');
+        var before_content = comments_container.querySelector('.content')[0];
+        comments_container.insertBefore(need_clone_comment_item,comments_container.firstChild);
+
+        comment_content.value = '';
+    }
+
+    update_submit_button();*/
+
+</script>
