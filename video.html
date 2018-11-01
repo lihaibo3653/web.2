@@ -1,0 +1,45 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> 
+
+<body>
+    <div class="progress-container">
+        <div class="progress-bar"></div>
+    </div>
+
+    <style>
+        .progress-container
+        {
+            position: relative;
+            width: 888px;
+            height: 30px;
+            background: #000000;
+            opacity: .7;
+        }
+
+        .progress-bar
+        {
+            position: absolute;
+            height: 100%;
+            width: 66%;
+            left:0;
+            bottom: 0;
+            background: #eeeeee;
+            opacity: .7;
+        }
+
+    </style>
+
+
+<script>
+
+    var progress_container =jQuery('.progress-container');
+    progress_container.mousemove(function(e){
+    console.log('mousemove:',e);
+
+    var p = (e.offsetX / progress_container.width()) * 100;
+    jQuery('.progress-bar').css('width',p + "%");
+})
+
+
+
+</script>
+</body>
