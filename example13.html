@@ -1,0 +1,34 @@
+<body>
+
+    <div class="loading">
+        <div></div>
+    </div>
+
+    <style>
+        .loading div {
+            border-radius: 50%;
+            /* border-color: #dc2b2b transparent transparent transparent; */
+            width: 60px;
+            height: 60px;
+            border: 6px solid #ff4141;
+            box-sizing: border-box;
+            border-color: #dc2b2b #dc2b2b transparent;
+            animation-name: loading-keyframes;
+            animation-duration: .8s;
+            animation-play-state: running;
+            animation-timing-function: linear;
+            animation-iteration-count: infinite;
+        }
+
+
+        @keyframes loading-keyframes {
+            0% {
+                transform: rotate(0deg)
+            }
+
+            100% {
+                transform: rotate(360deg)
+            }
+        }
+    </style>
+</body>
