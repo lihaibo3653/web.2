@@ -1,3 +1,11 @@
+<head>
+
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximun-scale=1,user-scalable=0">
+
+    <link ref="stylesheet" type="text/css" media="screen and (max-width:768px)">
+
+</head>
+
 <body>
 
     <div class="loading">
@@ -49,6 +57,54 @@
 
             100% {
                 transform: rotate(360deg)
+            }
+        }
+    </style>
+
+    <script>
+        //@media not | only [and]
+    </script>
+
+    <div class="media" style="width:100%">
+        <img src="https://i.pinimg.com/236x/a8/21/c3/a821c30538fe2a716e09f725758069ee.jpg">
+    </div>
+
+
+    <script>
+        //对video标签在不同的屏幕下，进行适配。
+
+    </script>
+
+    <style>
+        html {
+            font-size: 14px;
+        }
+
+        @media screen and (min-width:1024px) {
+            body {
+                background: #1d05ee;
+                font-size: 1rem;
+            }
+
+            .media img {
+                width: 600px;
+            }
+        }
+
+
+        @media screen and (min-width:768px) and (max-width:1024px) {
+            body {
+                background: #29ff0c;
+            }
+        }
+
+        @media screen and (max-device-width:480px) {
+            body {
+                background: #ffee00;
+            }
+
+            .media img {
+                width: 100%;
             }
         }
     </style>
