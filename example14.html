@@ -1,0 +1,43 @@
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+
+<body>
+
+    <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+    <img ondragstart="ondragstart" draggable="true" src="https://goss2.vcg.com/creative/vcg/800/version23/VCG21gic13775003.jpg"
+        id="img">
+
+
+    <style>
+        img,
+        #div1 {
+            width: 200px;
+            height: 200px;
+        }
+
+        #div1 {
+            border: 6px #ec0000;
+            background: #ec0000;
+        }
+    </style>
+
+    <script>
+
+        //触发拖动完成事件
+        var drop = function (e) {
+            console.log('drop:', e);
+
+            jQuery('img').appendTo(jQuery('#div1'));
+        }
+
+        //正在拖动
+        var allowDrop = function (e) {
+            console.log('allowDrop:', e);
+            e.preventDefault();
+        }
+
+        //开始拖动
+        var ondragstart = function (e) {
+            console.log("ondragstart:", e);
+        }
+    </script>
+</body>
